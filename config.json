@@ -8,7 +8,7 @@
 	// 可以按照说明进行修改来达到加速扫描的效果, 但是为了结果的准确性最好还是设置为最高
 
 	// 扫描并发数
-	"ScanWorker": 100,
+	"ScanWorker": 2000,
 
 	// 是否启用 Ping, 每次扫描 Tls、Quic...前都会先 ping 一下
 	"VerifyPing": false,
