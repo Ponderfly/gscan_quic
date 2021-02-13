@@ -21,3 +21,4 @@ gscan_quic/
 backup/
 
 iprange*
+*.user.json
