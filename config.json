@@ -36,7 +36,7 @@
 		"OutputSeparator": "\r\n",
 		// 支持带端口格式的IP, 只是为了使用方便, 并不是真的支持端口, 端口会被自动去除
 		"InputFile": "./iprange_ping.txt",
-		"OutputFile": "./out_ping.txt",
+		"OutputFile": "./out_ping.txt"
 	},
 
 	"QUIC": {
@@ -68,7 +68,7 @@
 		// 3: 测试 HTTP 连接
 		// 4: 验证是否是 NoSuchBucket 错误
 		// (2.x版默认等级为3, 所以如果lv2搜到的IP不能用, 可以改为 3)
-		"Level": 4,
+		"Level": 4
 	},
 
 	// 暂时只支持 google IP
@@ -87,7 +87,7 @@
 		// 1: 测试 tls 连接并握手成功
 		// 2: 证书验证
 		// 3: http 测试
-		"Level": 3,
+		"Level": 3
 	},
 
 	"SNI": {
@@ -96,11 +96,11 @@
 		// 当然你也可以改成一个来简单确认
 		// 还有, 不要填封锁严重的域名, 比如 google 的域名
 		// 这里的域名最好不用默认的, 防止检测
-		"ServerName": ["www.bing.com", "duckduckgo.com"],
-		// "HTTPVerifyHosts": ["dns.google.com"],
-		"HandshakeTimeout": 2500,
+		"ServerName": ["dns.google"],
+		"HTTPVerifyHosts": ["www.google.com"],
+		"HandshakeTimeout": 10000,
 		"ScanMinRTT": 0,
-		"ScanMaxRTT": 3000,
+		"ScanMaxRTT": 5000,
 		"RecordLimit": 10000,
 		"OutputSeparator": "\r\n",
 		"InputFile": "./iprange_sni.txt",
@@ -108,6 +108,6 @@
 		// 1: 测试 tls 连接并握手成功
 		// 2: 证书验证
 		// 3: http 测试
-		"Level": 2,
-	},
+		"Level": 3
+	}
 }

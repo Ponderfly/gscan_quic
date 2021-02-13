@@ -5,6 +5,7 @@
 *.dylib
 *.zip
 *.7z
+gscan_quic
 
 out*.txt
 
@@ -18,3 +19,5 @@ out*.txt
 .glide/
 gscan_quic/
 backup/
+
+iprange*

@@ -6,13 +6,19 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"time"
+	"math/rand"
 )
 
 func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 	tlscfg := &tls.Config{
 		InsecureSkipVerify: true,
 	}
-
+	var Host string
+	if len(config.HTTPVerifyHosts) == 0 {
+		Host = randomHost()
+	} else {
+		Host = config.HTTPVerifyHosts[rand.Intn(len(config.HTTPVerifyHosts))]
+	}
 	for _, serverName := range config.ServerName {
 		start := time.Now()
 		conn, err := net.DialTimeout("tcp", net.JoinHostPort(ip, "443"), config.ScanMaxRTT)
@@ -36,6 +42,7 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 		}
 		if config.Level > 2 {
 			req, err := http.NewRequest(http.MethodHead, "https://"+serverName, nil)
+			req.Header.Add("Host", Host)
 			if err != nil {
 				tlsconn.Close()
 				return false
@@ -51,7 +58,7 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 			// 	io.Copy(ioutil.Discard, resp.Body)
 			// 	resp.Body.Close()
 			// }
-			if resp.StatusCode >= 400 {
+			if resp.StatusCode != 404 {
 				tlsconn.Close()
 				return false
 			}
