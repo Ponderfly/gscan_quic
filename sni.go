@@ -15,10 +15,16 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 		InsecureSkipVerify: true,
 	}
 	var Host string
+	var VerifyCN string
 	if len(config.HTTPVerifyHosts) == 0 {
 		Host = randomHost()
 	} else {
 		Host = config.HTTPVerifyHosts[rand.Intn(len(config.HTTPVerifyHosts))]
+	}
+	if len(config.VerifyCommonName) == 0 {
+		VerifyCN = randomHost()
+	} else {
+		VerifyCN = config.VerifyCommonName[rand.Intn(len(config.VerifyCommonName))]
 	}
 	for _, serverName := range config.ServerName {
 		start := time.Now()
@@ -36,7 +42,7 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 		}
 		if config.Level > 1 {
 			pcs := tlsconn.ConnectionState().PeerCertificates
-			if len(pcs) == 0 || pcs[0].Subject.CommonName != serverName {
+			if len(pcs) == 0 || pcs[0].Subject.CommonName != VerifyCN {
 				fmt.Println("CN: %s", pcs[0].Subject.CommonName)
 				tlsconn.Close()
 				return false

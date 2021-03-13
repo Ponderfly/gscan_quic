@@ -49,6 +49,7 @@
 		// HTTPVerifyHosts 是 http 测试时使用的测试地址
 		// 如果设置多个, 将会随机选择一个进行测试
 		"HTTPVerifyHosts": ["dns.google.com"],
+		"VerifyCommonName": [""],
 		// 握手超时时间, 单位: 毫秒
 		"HandshakeTimeout": 2500,
 		"ScanMinRTT": 0,
@@ -77,6 +78,7 @@
 		"ScanCountPerIP": 1,
 		"ServerName": [],
 		"HTTPVerifyHosts": ["dns.google.com"],
+		"VerifyCommonName": [""],
 		"HandshakeTimeout": 2500,
 		"ScanMinRTT": 0,
 		"ScanMaxRTT": 3000,
@@ -98,6 +100,7 @@
 		// 这里的域名最好不用默认的, 防止检测
 		"ServerName": ["dns.google"],
 		"HTTPVerifyHosts": ["www.google.com"],
+		"VerifyCommonName": [""],
 		"HandshakeTimeout": 10000,
 		"ScanMinRTT": 0,
 		"ScanMaxRTT": 5000,
