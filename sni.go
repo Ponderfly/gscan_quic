@@ -7,6 +7,7 @@ import (
 	"net/http/httputil"
 	"time"
 	"math/rand"
+	"fmt"
 )
 
 func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
@@ -36,6 +37,7 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 		if config.Level > 1 {
 			pcs := tlsconn.ConnectionState().PeerCertificates
 			if len(pcs) == 0 || pcs[0].Subject.CommonName != serverName {
+				fmt.Println("CN: %s", pcs[0].Subject.CommonName)
 				tlsconn.Close()
 				return false
 			}
