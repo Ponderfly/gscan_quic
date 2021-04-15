@@ -50,6 +50,7 @@
 		// 如果设置多个, 将会随机选择一个进行测试
 		"HTTPVerifyHosts": ["dns.google.com"],
 		"VerifyCommonName": [""],
+		"ValidStatusCode": 200,
 		// 握手超时时间, 单位: 毫秒
 		"HandshakeTimeout": 2500,
 		"ScanMinRTT": 0,
@@ -79,6 +80,7 @@
 		"ServerName": [],
 		"HTTPVerifyHosts": ["dns.google.com"],
 		"VerifyCommonName": [""],
+		"ValidStatusCode": 200,
 		"HandshakeTimeout": 2500,
 		"ScanMinRTT": 0,
 		"ScanMaxRTT": 3000,
@@ -99,8 +101,9 @@
 		// 还有, 不要填封锁严重的域名, 比如 google 的域名
 		// 这里的域名最好不用默认的, 防止检测
 		"ServerName": ["dns.google"],
-		"HTTPVerifyHosts": ["www.google.com"],
+		"HTTPVerifyHosts": ["www.google.com.hk"],
 		"VerifyCommonName": [""],
+		"ValidStatusCode": 200,
 		"HandshakeTimeout": 10000,
 		"ScanMinRTT": 0,
 		"ScanMaxRTT": 5000,

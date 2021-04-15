@@ -16,6 +16,7 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 	}
 	var Host string
 	var VerifyCN string
+	var Code int
 	if len(config.HTTPVerifyHosts) == 0 {
 		Host = randomHost()
 	} else {
@@ -26,6 +27,8 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 	} else {
 		VerifyCN = config.VerifyCommonName[rand.Intn(len(config.VerifyCommonName))]
 	}
+	Code = config.ValidStatusCode
+
 	for _, serverName := range config.ServerName {
 		start := time.Now()
 		conn, err := net.DialTimeout("tcp", net.JoinHostPort(ip, "443"), config.ScanMaxRTT)
@@ -66,7 +69,7 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 			// 	io.Copy(ioutil.Discard, resp.Body)
 			// 	resp.Body.Close()
 			// }
-			if resp.StatusCode != 404 {
+			if resp.StatusCode != Code {
 				tlsconn.Close()
 				return false
 			}
