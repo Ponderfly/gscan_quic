@@ -100,9 +100,9 @@
 		// 当然你也可以改成一个来简单确认
 		// 还有, 不要填封锁严重的域名, 比如 google 的域名
 		// 这里的域名最好不用默认的, 防止检测
-		"ServerName": ["dns.google"],
+		"ServerName": ["about.google"],
 		"HTTPVerifyHosts": ["www.google.com.hk"],
-		"VerifyCommonName": [""],
+		"VerifyCommonName": ["about.google"],
 		"ValidStatusCode": 200,
 		"HandshakeTimeout": 10000,
 		"ScanMinRTT": 0,
@@ -112,8 +112,8 @@
 		"InputFile": "./iprange_gws_a.txt",
 		"OutputFile": "./out_gws_a.txt",
 		// 1: 测试 tls 连接并握手成功
-		// 2: 证书验证
-		// 3: http 测试
+		// 2: 证书验证: VerifyCommonName
+		// 3: http 测试: StatusCode
 		"Level": 3
 	}
 }
