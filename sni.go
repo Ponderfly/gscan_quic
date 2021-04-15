@@ -22,11 +22,7 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 	} else {
 		Host = config.HTTPVerifyHosts[rand.Intn(len(config.HTTPVerifyHosts))]
 	}
-	if len(config.VerifyCommonName) == 0 {
-		VerifyCN = randomHost()
-	} else {
-		VerifyCN = config.VerifyCommonName[rand.Intn(len(config.VerifyCommonName))]
-	}
+	VerifyCN = config.VerifyCommonName
 	Code = config.ValidStatusCode
 
 	for _, serverName := range config.ServerName {
