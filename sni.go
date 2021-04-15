@@ -42,7 +42,7 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 		if config.Level > 1 {
 			pcs := tlsconn.ConnectionState().PeerCertificates
 			if len(pcs) == 0 || pcs[0].Subject.CommonName != VerifyCN {
-				fmt.Println("CN: %s", pcs[0].Subject.CommonName)
+				fmt.Println("CN:", pcs[0].Subject.CommonName)
 				tlsconn.Close()
 				return false
 			}
@@ -66,6 +66,7 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 			// 	resp.Body.Close()
 			// }
 			if resp.StatusCode != Code {
+				fmt.Println("Status Code:", resp.StatusCode)
 				tlsconn.Close()
 				return false
 			}
