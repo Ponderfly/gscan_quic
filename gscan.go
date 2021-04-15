@@ -20,7 +20,7 @@ type ScanConfig struct {
 	ScanCountPerIP   int
 	ServerName       []string
 	HTTPVerifyHosts  []string
-	VerifyCommonName  []string
+	VerifyCommonName string
 	ValidStatusCode  int
 	HandshakeTimeout time.Duration
 	ScanMinRTT       time.Duration
