@@ -102,6 +102,7 @@
 		// 这里的域名最好不用默认的, 防止检测
 		"ServerName": ["about.google"],
 		"HTTPVerifyHosts": ["www.google.com.hk"],
+		"HTTPPath": "/",
 		"VerifyCommonName": "about.google",
 		"ValidStatusCode": 200,
 		"HandshakeTimeout": 10000,

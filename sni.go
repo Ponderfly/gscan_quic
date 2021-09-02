@@ -16,6 +16,7 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 	}
 	var Host string
 	var VerifyCN string
+	var Path string
 	var Code int
 	if len(config.HTTPVerifyHosts) == 0 {
 		Host = randomHost()
@@ -24,6 +25,7 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 	}
 	VerifyCN = config.VerifyCommonName
 	Code = config.ValidStatusCode
+	Path = config.HTTPPath
 
 	for _, serverName := range config.ServerName {
 		start := time.Now()
@@ -48,8 +50,8 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 			}
 		}
 		if config.Level > 2 {
-			req, err := http.NewRequest(http.MethodHead, "https://"+serverName, nil)
-			req.Header.Add("Host", Host)
+			req, err := http.NewRequest(http.MethodHead, "https://"+serverName+Path, nil)
+			req.Host = Host
 			if err != nil {
 				tlsconn.Close()
 				return false
