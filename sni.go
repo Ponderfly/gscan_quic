@@ -18,6 +18,9 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 		ResponseHeaderTimeout: config.ScanMaxRTT,
 	}
 	httpconn := &http.Client{
+		CheckRedirect: func(req *http.Request, via []*http.Request) error {
+			return http.ErrUseLastResponse
+		},
 		Transport: tr,
 	}
 	var Host string
