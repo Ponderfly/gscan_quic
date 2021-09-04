@@ -2,17 +2,23 @@ package main
 
 import (
 	"crypto/tls"
+	"fmt"
+	"math/rand"
 	"net"
 	"net/http"
-	"net/http/httputil"
 	"time"
-	"math/rand"
-	"fmt"
 )
 
 func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 	tlscfg := &tls.Config{
 		InsecureSkipVerify: true,
+	}
+	tr := &http.Transport{
+		TLSClientConfig:       tlscfg,
+		ResponseHeaderTimeout: config.ScanMaxRTT,
+	}
+	httpconn := &http.Client{
+		Transport: tr,
 	}
 	var Host string
 	var VerifyCN string
@@ -57,7 +63,8 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 				return false
 			}
 			tlsconn.SetDeadline(time.Now().Add(config.ScanMaxRTT - time.Since(start)))
-			resp, err := httputil.NewClientConn(tlsconn, nil).Do(req)
+			//resp, err := httputil.NewClientConn(tlsconn, nil).Do(req)
+			resp, err := httpconn.Do(req)
 			if err != nil {
 				tlsconn.Close()
 				return false
@@ -75,6 +82,7 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 		}
 
 		tlsconn.Close()
+		httpconn.CloseIdleConnections()
 
 		rtt := time.Since(start)
 		if rtt < config.ScanMinRTT {
