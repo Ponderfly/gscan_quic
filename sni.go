@@ -56,16 +56,19 @@ func testSni(ip string, config *ScanConfig, record *ScanRecord) bool {
 			}
 		}
 		if config.Level > 2 {
-			req, err := http.NewRequest(http.MethodHead, "https://"+serverName+Path, nil)
+			req, err := http.NewRequest(http.MethodHead, "https://"+ip+Path, nil)
 			req.Host = Host
 			if err != nil {
 				tlsconn.Close()
+				//fmt.Println("build req error")
 				return false
 			}
 			tlsconn.SetDeadline(time.Now().Add(config.ScanMaxRTT - time.Since(start)))
 			//resp, err := httputil.NewClientConn(tlsconn, nil).Do(req)
 			resp, err := httpconn.Do(req)
 			if err != nil {
+				//fmt.Println("httpconn error")
+				//fmt.Println(err)
 				tlsconn.Close()
 				return false
 			}
