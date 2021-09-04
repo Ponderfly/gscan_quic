@@ -96,10 +96,6 @@
 
 	"SNI": {
 		"ScanCountPerIP": 1,
-		// 注意, SNI 需要同时验证两个不同域名的 ServerName 才能正确确认
-		// 当然你也可以改成一个来简单确认
-		// 还有, 不要填封锁严重的域名, 比如 google 的域名
-		// 这里的域名最好不用默认的, 防止检测
 		"ServerName": ["about.google"],
 		"HTTPVerifyHosts": ["www.google.com.hk"],
 		"HTTPPath": "/",
