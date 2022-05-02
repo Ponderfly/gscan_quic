@@ -97,6 +97,7 @@
 	"SNI": {
 		"ScanCountPerIP": 1,
 		"ServerName": ["about.google"],
+		// ServerName is mandatory
 		"HTTPVerifyHosts": ["www.google.com.hk"],
 		"HTTPPath": "/",
 		"VerifyCommonName": "about.google",
